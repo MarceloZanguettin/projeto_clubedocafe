@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +19,10 @@ public class Produto {
     private String descricao;
     @Column(nullable = false)
     private String marca;
+
+    @ManyToOne
+    @JoinColumn(name = "id_compra_possui_produto", nullable = false)
+    private CompraPossuiProduto compraPossiProduto;
     
     public Long getId() {
         return id;
@@ -36,4 +42,11 @@ public class Produto {
     public void setMarca(String marca) {
         this.marca = marca;
     }
+    public CompraPossuiProduto getCompraPossiProduto() {
+        return compraPossiProduto;
+    }
+    public void setCompraPossiProduto(CompraPossuiProduto compraPossiProduto) {
+        this.compraPossiProduto = compraPossiProduto;
+    }
+    
 }
