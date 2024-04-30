@@ -1,0 +1,8 @@
+POST https://8080-marcelozang-projetoclub-3i4go5vs1tm.ws-us110.gitpod.io/participantes
+Content-Type: application/json
+
+{
+    "nome": "Nome de teste 1",
+    "registroFuncionario": 3184,
+    "email": "nomedetes@j.com.br"
+}
