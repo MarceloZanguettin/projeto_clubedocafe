@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,5 +59,16 @@ public class ParticipanteController {
         result.get().setEmail(participante.getEmail());
 
         return participanteRepo.save(result.get());
+    }
+
+    @DeleteMapping("/{id}")
+    private void delete(@PathVariable long id) {
+        if(participanteRepo.existsById(id)) {
+            participanteRepo.deleteById(id);
+        } else {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Participante não encontrado"
+            );
+        }
     }
 }
