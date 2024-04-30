@@ -1,0 +1,8 @@
+PUT https://8080-marcelozang-projetoclub-3i4go5vs1tm.ws-us110.gitpod.io/participantes/1
+Content-Type: application/json
+
+{
+    "nome": "Trocando o nome, numero e email",
+    "registroFuncionario": 167,
+    "email": "trocandoemail@j.com.br"
+}
