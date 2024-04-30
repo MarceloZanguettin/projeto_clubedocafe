@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class ListaCompra {
     private Long id;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    @Column(nullable = false)
     private Calendar dataCompra;
 
     public Long getId() {

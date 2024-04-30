@@ -4,10 +4,13 @@ import java.util.Calendar;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,11 +19,18 @@ public class Comprovante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String mes;
+    @Column(nullable = false)
     private Float valor;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    @Column(nullable = false)
     private Calendar dataPagamento;
+
+    @ManyToOne
+    @JoinColumn(name = "id_participante", nullable = false)
+    private Participante participante;
 
     public Calendar getDataPagamento() {
         return dataPagamento;
@@ -45,5 +55,11 @@ public class Comprovante {
     }
     public void setValor(Float valor) {
         this.valor = valor;
+    }
+    public Participante getParticipante() {
+        return participante;
+    }
+    public void setParticipante(Participante participante) {
+        this.participante = participante;
     }
 }
