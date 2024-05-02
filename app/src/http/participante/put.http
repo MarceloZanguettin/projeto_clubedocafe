@@ -1,4 +1,4 @@
-PUT https://8080-marcelozang-projetoclub-3i4go5vs1tm.ws-us110.gitpod.io/participantes/1
+PUT https://8080-marcelozang-projetoclub-0rcagz03j9k.ws-us110.gitpod.io/participantes/1
 Content-Type: application/json
 
 {

@@ -1,0 +1,9 @@
+PUT https://8080-marcelozang-projetoclub-0rcagz03j9k.ws-us110.gitpod.io/comprovante/1
+Content-Type: application/json
+
+{
+    "mes": "Mês de teste 2",
+    "valor": 45.00,
+    "dataPagamento": "02/05/2024 12:42:00",
+    "Participante": {"id": 2}
+}
