@@ -42,7 +42,7 @@ public class ComprovanteController {
 
     @PostMapping
     public Comprovante post(@RequestBody Comprovante comprovante) {
-        return comprovanteRepo.save(comprovante)
+        return comprovanteRepo.save(comprovante);
     }
 
     @PutMapping("/{id}")
