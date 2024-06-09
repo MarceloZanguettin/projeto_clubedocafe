@@ -40,12 +40,12 @@ public class ParticipanteController {
     }
 
     @PostMapping
-    private Participante post(@RequestBody Participante participante) {
+    public Participante post(@RequestBody Participante participante) {
         return participanteRepo.save(participante);
     }
 
     @PutMapping("/{id}")
-    private Participante put(@RequestBody Participante participante, @PathVariable long id) {
+    public Participante put(@RequestBody Participante participante, @PathVariable long id) {
         Optional<Participante> result = participanteRepo.findById(id);
 
         if(result.isEmpty()) {
@@ -62,7 +62,7 @@ public class ParticipanteController {
     }
 
     @DeleteMapping("/{id}")
-    private void delete(@PathVariable long id) {
+    public void delete(@PathVariable long id) {
         if(participanteRepo.existsById(id)) {
             participanteRepo.deleteById(id);
         } else {

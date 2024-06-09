@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import application.model.Comprovante;
+import application.model.Participante;
 import application.repository.ComprovanteRepository;
 
 @RestController
@@ -22,6 +23,9 @@ import application.repository.ComprovanteRepository;
 public class ComprovanteController {
     @Autowired
     private ComprovanteRepository comprovanteRepo;
+
+    @Autowired
+    private Participante participanteRepo;
 
     @GetMapping
     public Iterable<Comprovante> getAll() {
@@ -42,11 +46,16 @@ public class ComprovanteController {
 
     @PostMapping
     public Comprovante post(@RequestBody Comprovante comprovante) {
+        if(!participanteRepo.existById(comprovante.getParticipante().getId())) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST, "Participante vinculado não encontrado"
+            );
+        }
         return comprovanteRepo.save(comprovante);
     }
 
     @PutMapping("/{id}")
-    private Comprovante put(@RequestBody Comprovante comprovante, @PathVariable long id) {
+    public Comprovante put(@RequestBody Comprovante comprovante, @PathVariable long id) {
         Optional<Comprovante> result = comprovanteRepo.findById(id);
         if(result.isEmpty()) {
             throw new ResponseStatusException(
@@ -54,6 +63,11 @@ public class ComprovanteController {
             );
         }
 
+        if(!participanteRepo.existById(comprovante.getParticipante().getId())) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST, "Participante vinculado não encontrado"
+            );
+        }
         result.get().setParticipante(comprovante.getParticipante());
         result.get().setValor(comprovante.getValor());
         result.get().setMes(comprovante.getMes());
@@ -62,7 +76,7 @@ public class ComprovanteController {
     }
 
     @DeleteMapping("/{id}")
-    private void delete(@PathVariable long id) {
+    public void delete(@PathVariable long id) {
         if(comprovanteRepo.existsById(id)) {
             comprovanteRepo.deleteById(id);
         } else {
